@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import vendingmachine.util.StringProcessor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,7 @@ public class InputValidator {
     public static final String ERROR_MONEY_UNIT = PREFIX + "자판기가 보유하고 있는 금액은 10원 단위이어야 합니다.";
     public static final String ERROR_STRING = PREFIX + "숫자를 입력해주세요.";
     public static final String ERROR_ITEM_AMOUNT = PREFIX + "상품 수량은 1개 이상이여야 합니다.";
-    public static final String DELIMITER_SEMICOLON = ";";
-    public static final String DELIMITER_COMMA = ",";
+
 
     public void validateVendingMachineMoney(String input) {
         int money = toInteger(input);
@@ -45,36 +46,13 @@ public class InputValidator {
     }
 
     public void validateItems(String input) {
-        List<String> items = firstPreProcess(input);
-        List<String[]> itemDetails = secondPreProcess(items);
+        List<String> items = StringProcessor.firstPreProcess(input);
+        List<String[]> itemDetails = StringProcessor.secondPreProcess(items);
 
         for (String[] itemDetail : itemDetails) {
             validatePrice(itemDetail[ITEM_PRICE_INDEX]);
             validateAmount(itemDetail[ITEM_AMOUNT_INDEX]);
         }
-    }
-
-    private List<String> firstPreProcess(String input) {
-        List<String> result = new ArrayList<>();
-
-        String[] items = input.split(DELIMITER_SEMICOLON);
-        for (String item : items) {
-            StringBuilder stringBuilder = new StringBuilder(item);
-            stringBuilder.delete(item.length() - 1, item.length());
-            stringBuilder.delete(0, 1);
-            result.add(stringBuilder.toString());
-        }
-        return result;
-    }
-
-    private List<String[]> secondPreProcess(List<String> items) {
-        List<String[]> result = new ArrayList<>();
-
-        for (String item : items) {
-            String[] itemDetails = item.split(DELIMITER_COMMA);
-            result.add(itemDetails);
-        }
-        return result;
     }
 
     private void validatePrice(String input) {

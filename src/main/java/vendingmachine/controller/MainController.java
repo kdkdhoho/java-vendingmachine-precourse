@@ -27,6 +27,7 @@ public class MainController {
 
     private void setUpItems() {
         String items = repeat(inputView::readItems);
+        mainService.setUpItems(items);
     }
 
     private <T> T repeat(Supplier<T> inputReader) {

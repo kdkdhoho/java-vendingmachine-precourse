@@ -2,7 +2,9 @@ package vendingmachine.service;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.util.StringProcessor;
 
+import java.util.List;
 import java.util.Map;
 
 public class MainService {
@@ -15,5 +17,11 @@ public class MainService {
 
     public Map<Coin, Integer> getVendingMachineCoins() {
         return vendingMachine.getCoins();
+    }
+
+    public void setUpItems(String input) {
+        List<String> items = StringProcessor.firstPreProcess(input);
+        List<String[]> itemDetails = StringProcessor.secondPreProcess(items);
+        vendingMachine.setUpItems(itemDetails);
     }
 }
