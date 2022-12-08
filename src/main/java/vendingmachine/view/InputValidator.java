@@ -19,8 +19,7 @@ public class InputValidator {
     public static final String ERROR_ITEM_AMOUNT = PREFIX + "상품 수량은 1개 이상이여야 합니다.";
     public static final String ERROR_INSERT_MONEY_RANGE = PREFIX + "투입 금액은 0원 초과여야 합니다.";
     public static final String ERROR_INSERT_MONEY_UNIT = PREFIX + "투입 금액은 10원으로 나누어 떨어져야 합니다.";
-
-
+    
     public void validateVendingMachineMoney(String input) {
         int money = toInteger(input);
         validateRange(money);
