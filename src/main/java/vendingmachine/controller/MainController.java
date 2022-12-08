@@ -28,7 +28,7 @@ public class MainController {
         try {
             return inputReader.get();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            outputView.printError(e.getMessage());
             return repeat(inputReader);
         }
     }
