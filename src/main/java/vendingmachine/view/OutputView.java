@@ -18,7 +18,17 @@ public class OutputView {
         System.out.printf("%d원 - %d개\n", Coin.COIN_10.getAmount(), coins.getOrDefault(Coin.COIN_10, 0));
     }
 
-    public void printInsertMoney(int insertMoney) {
-        System.out.printf("투입 금액 : %d원\n", insertMoney);
+    public void printRemainMoney(int remainMoney) {
+        System.out.printf("\n투입 금액: %d원\n", remainMoney);
+    }
+
+    public void printChanges(Map<Coin, Integer> exchange) {
+        System.out.println("잔돈");
+        Coin[] values = Coin.values();
+        for (Coin coin : values) {
+            if (exchange.get(coin) != 0) {
+                System.out.printf("%d원 - %d개\n", coin.getAmount(), exchange.get(coin));
+            }
+        }
     }
 }

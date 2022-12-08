@@ -45,4 +45,8 @@ public class MainService {
         vendingMachine.buy(itemName);
         return true;
     }
+
+    public Map<Coin, Integer> exchange() {
+        return vendingMachine.exchange();
+    }
 }

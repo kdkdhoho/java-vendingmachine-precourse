@@ -1,13 +1,11 @@
 package vendingmachine.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Coin;
 import vendingmachine.service.MainService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MainController {
@@ -21,10 +19,11 @@ public class MainController {
         readInsertMoney();
 
         while (mainService.canBuy()) {
-            outputView.printInsertMoney(mainService.getInsertMoney());
+            outputView.printRemainMoney(mainService.getInsertMoney());
             repeat(this::buyItem);
         }
-        outputView.printInsertMoney(mainService.getInsertMoney());
+        outputView.printRemainMoney(mainService.getInsertMoney());
+        outputView.printChanges(mainService.exchange());
     }
 
     private void setupVendingMachine() {

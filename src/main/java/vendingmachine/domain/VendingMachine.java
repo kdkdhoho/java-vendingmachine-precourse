@@ -1,5 +1,8 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.money.RemainMoney;
+import vendingmachine.domain.money.InsertMoney;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,7 @@ public class VendingMachine {
     private final Map<Coin, Integer> coins;
     private Items items;
     private InsertMoney insertMoney;
+    private RemainMoney remainMoney;
 
     public VendingMachine(int money) {
         coins = Coin.exchange(money);
@@ -22,11 +26,12 @@ public class VendingMachine {
     }
 
     public void setUpInsertMoney(int money) {
+        this.remainMoney = new RemainMoney(money);
         this.insertMoney = new InsertMoney(money);
     }
 
     public boolean canBuy() {
-        if (insertMoney.get() >= minimumItemPrice() && !items.isAllSoldOut()) {
+        if (remainMoney.get() >= minimumItemPrice() && !items.isAllSoldOut()) {
             return true;
         }
         return false;
@@ -36,8 +41,8 @@ public class VendingMachine {
         return this.items.minimumPrice();
     }
 
-    public InsertMoney getInsertMoney() {
-        return insertMoney;
+    public RemainMoney getInsertMoney() {
+        return remainMoney;
     }
 
     public boolean canBuy(String itemName) {
@@ -50,6 +55,13 @@ public class VendingMachine {
     public void buy(String itemName) {
         Item item = items.find(itemName);
         item.decrease();
-        this.insertMoney.calculate(item);
+        this.remainMoney.calculate(item);
+    }
+
+    public Map<Coin, Integer> exchange() {
+        if (insertMoney.isBiggerThan(remainMoney)) {
+            return this.coins;
+        }
+        return this.remainMoney.exchange();
     }
 }
