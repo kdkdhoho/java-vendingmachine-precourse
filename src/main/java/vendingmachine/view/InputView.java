@@ -13,9 +13,16 @@ public class InputView {
     }
 
     public String readItems() {
-        System.out.println("\n상품명과 가격, 수량을 입력해 주세요. ([콜라,1500,20];[사이다,1000,10])");
+        System.out.println("\n상품명과 가격, 수량을 입력해 주세요. (예: [콜라,1500,20];[사이다,1000,10])");
         String input = readLine();
         inputValidator.validateItems(input);
+        return input;
+    }
+
+    public String readInsertMoney() {
+        System.out.println("\n투입 금액을 입력해 주세요.");
+        String input = readLine();
+        inputValidator.validateInsertMoney(input);
         return input;
     }
 }

@@ -2,7 +2,6 @@ package vendingmachine.view;
 
 import vendingmachine.util.StringProcessor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InputValidator {
@@ -12,11 +11,14 @@ public class InputValidator {
     public static final int ITEM_AMOUNT_INDEX = 2;
     public static final int ITEM_AMOUNT_MINIMUM = 1;
     public static final int ITEM_PRICE_MINIMUM = 100;
+    public static final int INSERT_MONEY_MINIMUM = 0;
     public static final String PREFIX = "[ERROR] ";
     public static final String ERROR_MONEY_RANGE = PREFIX + "자판기가 보유하고 있는 금액은 10원 이상이어야 합니다.";
-    public static final String ERROR_MONEY_UNIT = PREFIX + "자판기가 보유하고 있는 금액은 10원 단위이어야 합니다.";
+    public static final String ERROR_MONEY_UNIT = PREFIX + "자판기가 보유하고 있는 금액은 10원으로 나누어 떨어져야 합니다.";
     public static final String ERROR_STRING = PREFIX + "숫자를 입력해주세요.";
     public static final String ERROR_ITEM_AMOUNT = PREFIX + "상품 수량은 1개 이상이여야 합니다.";
+    public static final String ERROR_INSERT_MONEY_RANGE = PREFIX + "투입 금액은 0원 초과여야 합니다.";
+    public static final String ERROR_INSERT_MONEY_UNIT = PREFIX + "투입 금액은 10원으로 나누어 떨어져야 합니다.";
 
 
     public void validateVendingMachineMoney(String input) {
@@ -69,6 +71,16 @@ public class InputValidator {
         int amount = toInteger(input);
         if (amount < ITEM_AMOUNT_MINIMUM) {
             throw new IllegalArgumentException(ERROR_ITEM_AMOUNT);
+        }
+    }
+
+    public void validateInsertMoney(String input) {
+        int insertMoney = toInteger(input);
+        if (insertMoney <= INSERT_MONEY_MINIMUM) {
+            throw new IllegalArgumentException(ERROR_INSERT_MONEY_RANGE);
+        }
+        if (insertMoney % VENDING_MACHINE_MONEY_UNIT != 0) {
+            throw new IllegalArgumentException(ERROR_INSERT_MONEY_UNIT);
         }
     }
 }

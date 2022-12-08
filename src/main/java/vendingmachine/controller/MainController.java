@@ -16,6 +16,7 @@ public class MainController {
     public void run() {
         setupVendingMachine();
         setUpItems();
+        readInsertMoney();
     }
 
     private void setupVendingMachine() {
@@ -28,6 +29,10 @@ public class MainController {
     private void setUpItems() {
         String items = repeat(inputView::readItems);
         mainService.setUpItems(items);
+    }
+
+    private void readInsertMoney() {
+        String insertMoney = repeat(inputView::readInsertMoney);
     }
 
     private <T> T repeat(Supplier<T> inputReader) {
