@@ -25,4 +25,9 @@ public class InputView {
         inputValidator.validateInsertMoney(input);
         return input;
     }
+
+    public String readItemName() {
+        System.out.println("\n구매할 상품명을 입력해 주세요.");
+        return readLine();
+    }
 }

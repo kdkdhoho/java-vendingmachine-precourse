@@ -17,4 +17,8 @@ public class OutputView {
         System.out.printf("%d원 - %d개\n", Coin.COIN_50.getAmount(), coins.getOrDefault(Coin.COIN_50, 0));
         System.out.printf("%d원 - %d개\n", Coin.COIN_10.getAmount(), coins.getOrDefault(Coin.COIN_10, 0));
     }
+
+    public void printInsertMoney(int insertMoney) {
+        System.out.printf("투입 금액 : %d원\n", insertMoney);
+    }
 }

@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.InsertMoney;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.StringProcessor;
 
@@ -29,5 +28,21 @@ public class MainService {
     public void setUpInsertMoney(String input) {
         int money = Integer.parseInt(input);
         vendingMachine.setUpInsertMoney(money);
+    }
+
+    public boolean canBuy() {
+        return vendingMachine.canBuy();
+    }
+
+    public int getInsertMoney() {
+        return vendingMachine.getInsertMoney().get();
+    }
+
+    public boolean buy(String itemName) {
+        if (!vendingMachine.canBuy(itemName)) {
+            throw new IllegalArgumentException("[ERROR] 입력한 상품이 없거나 수량이 없습니다. 다시 입력해주세요");
+        }
+        vendingMachine.buy(itemName);
+        return true;
     }
 }
