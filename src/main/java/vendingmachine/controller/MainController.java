@@ -15,6 +15,7 @@ public class MainController {
 
     public void run() {
         setupVendingMachine();
+        setUpItems();
     }
 
     private void setupVendingMachine() {
@@ -22,6 +23,10 @@ public class MainController {
         mainService.setUpVendingMachine(vendingMachineMoney);
         Map<Coin, Integer> vendingMachineCoins = mainService.getVendingMachineCoins();
         outputView.printVendingMachineCoins(vendingMachineCoins);
+    }
+
+    private void setUpItems() {
+        String items = repeat(inputView::readItems);
     }
 
     private <T> T repeat(Supplier<T> inputReader) {

@@ -11,4 +11,11 @@ public class InputView {
         inputValidator.validateVendingMachineMoney(input);
         return input;
     }
+
+    public String readItems() {
+        System.out.println("\n상품명과 가격, 수량을 입력해 주세요. ([콜라,1500,20];[사이다,1000,10])");
+        String input = readLine();
+        inputValidator.validateItems(input);
+        return input;
+    }
 }
