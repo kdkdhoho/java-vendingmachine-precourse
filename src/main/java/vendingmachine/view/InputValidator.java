@@ -42,7 +42,7 @@ public class InputValidator {
     }
 
     private void validateUnit(int money) {
-        if (money % VENDING_MACHINE_MONEY_UNIT != 0) {
+        if (isTenUnit(money)) {
             throw new IllegalArgumentException(ERROR_MONEY_UNIT);
         }
     }
@@ -62,7 +62,7 @@ public class InputValidator {
         if (price < ITEM_PRICE_MINIMUM) {
             throw new IllegalArgumentException(ERROR_MONEY_RANGE);
         }
-        if (price % VENDING_MACHINE_MONEY_UNIT != 0) {
+        if (isTenUnit(price)) {
             throw new IllegalArgumentException(ERROR_MONEY_UNIT);
         }
     }
@@ -79,8 +79,12 @@ public class InputValidator {
         if (insertMoney <= INSERT_MONEY_MINIMUM) {
             throw new IllegalArgumentException(ERROR_INSERT_MONEY_RANGE);
         }
-        if (insertMoney % VENDING_MACHINE_MONEY_UNIT != 0) {
+        if (isTenUnit(insertMoney)) {
             throw new IllegalArgumentException(ERROR_INSERT_MONEY_UNIT);
         }
+    }
+
+    private boolean isTenUnit(int input) {
+        return input % VENDING_MACHINE_MONEY_UNIT != 0;
     }
 }
