@@ -33,6 +33,7 @@ public class MainController {
 
     private void readInsertMoney() {
         String insertMoney = repeat(inputView::readInsertMoney);
+        mainService.setUpInsertMoney(insertMoney);
     }
 
     private <T> T repeat(Supplier<T> inputReader) {

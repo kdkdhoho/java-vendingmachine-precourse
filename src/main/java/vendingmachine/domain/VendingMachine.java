@@ -7,6 +7,7 @@ import java.util.Map;
 public class VendingMachine {
     private final Map<Coin, Integer> coins;
     private Items items;
+    private InsertMoney insertMoney;
 
     public VendingMachine(int money) {
         coins = Coin.exchange(money);
@@ -18,5 +19,9 @@ public class VendingMachine {
 
     public void setUpItems(List<String[]> itemDetails) {
         items = new Items(Items.makeItems(itemDetails));
+    }
+
+    public void setUpInsertMoney(int money) {
+        this.insertMoney = new InsertMoney(money);
     }
 }

@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.InsertMoney;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.StringProcessor;
 
@@ -23,5 +24,10 @@ public class MainService {
         List<String> items = StringProcessor.firstPreProcess(input);
         List<String[]> itemDetails = StringProcessor.secondPreProcess(items);
         vendingMachine.setUpItems(itemDetails);
+    }
+
+    public void setUpInsertMoney(String input) {
+        int money = Integer.parseInt(input);
+        vendingMachine.setUpInsertMoney(money);
     }
 }
