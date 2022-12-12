@@ -13,6 +13,7 @@ public class MainController {
 
     public void run() {
         repeat(this::initMachineMoney);
+        outputView.printMachineCoins(mainService.getMachineCoins());
     }
 
     private boolean initMachineMoney() {
