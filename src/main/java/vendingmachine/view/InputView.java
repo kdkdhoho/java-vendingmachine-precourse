@@ -11,6 +11,10 @@ public class InputView {
     }
 
     private int toInt(String input) {
-        return Integer.parseInt(input);
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자를 입력헤주세요.");
+        }
     }
 }
