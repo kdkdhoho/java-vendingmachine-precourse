@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.service.MainService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -8,9 +9,15 @@ import java.util.function.Supplier;
 public class MainController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private final MainService mainService = new MainService();
 
     public void run() {
+        repeat(this::initMachineMoney);
+    }
+
+    private boolean initMachineMoney() {
         int machineMoney = repeat(inputView::readMachineMoney);
+        return mainService.initMachineMoney(machineMoney);
     }
 
     private <T> T repeat(Supplier<T> reader) {
