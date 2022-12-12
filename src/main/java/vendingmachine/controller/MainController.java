@@ -4,6 +4,7 @@ import vendingmachine.service.MainService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class MainController {
@@ -14,6 +15,8 @@ public class MainController {
     public void run() {
         repeat(this::initMachineMoney);
         outputView.printMachineCoins(mainService.getMachineCoins());
+
+        List<String> items = repeat(inputView::readItems);
     }
 
     private boolean initMachineMoney() {
