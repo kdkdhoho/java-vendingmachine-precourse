@@ -2,12 +2,14 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputView {
-    public static final int IDX_PRICE = 1;
-    public static final int IDX_QUANTITY = 2;
+    private static final int IDX_PRICE = 1;
+    private static final int IDX_QUANTITY = 2;
 
     public int readMachineMoney() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
@@ -19,21 +21,26 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자를 입력헤주세요.");
+            throw new NumberFormatException("다시 입력해주세요.");
         }
     }
 
-    public List<String> readItems() {
+    public List<String[]> readItems() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요. 예) [콜라,1500,20];[사이다,1000,10]");
         String[] input = Console.readLine().split(";");
-        List<String> items = Arrays.asList(input);
+        List<String> items = beforeProcess(input);
         validateItems(items);
-        return items;
+        return afterProcess(items);
+    }
+
+    private List<String> beforeProcess(String[] input) {
+        return Arrays.stream(input)
+                .map(data -> data.substring(1, data.length() - 1))
+                .collect(Collectors.toList());
     }
 
     private void validateItems(List<String> items) {
         for (String item : items) {
-            item = item.substring(1, item.length() - 1);
             String[] details = item.split(",");
             validateBlank(details);
             validateNumeric(details);
@@ -52,5 +59,14 @@ public class InputView {
     private void validateNumeric(String[] details) {
         toInt(details[IDX_PRICE]);
         toInt(details[IDX_QUANTITY]);
+    }
+
+    private List<String[]> afterProcess(List<String> input) {
+        List<String[]> result = new ArrayList<>();
+        for (String item : input) {
+            String[] details = item.split(",");
+            result.add(details);
+        }
+        return result;
     }
 }

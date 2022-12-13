@@ -25,6 +25,7 @@ public enum Coin {
         return amount;
     }
 
+    // TODO: 코드 개선
     public static Map<Coin, Integer> changeToCoins(Money money) {
         Map<Coin, Integer> result = new HashMap<>();
         List<Coin> coins = Arrays.asList(Coin.values());

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
-    public static final int DEFAULT = 0;
+    private static final int DEFAULT = 0;
 
     public void printError(String message) {
         System.out.println(ERROR_PREFIX + message);
