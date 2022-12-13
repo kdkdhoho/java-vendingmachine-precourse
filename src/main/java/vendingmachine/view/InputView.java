@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +74,7 @@ public class InputView {
         return result;
     }
 
-    public int readUserMoney() {
+    public int readConsumerMoney() {
         System.out.println(System.lineSeparator() + "투입 금액을 입력해 주세요.");
         String input = readLine();
         return toInt(input);

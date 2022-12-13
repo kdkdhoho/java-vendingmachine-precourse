@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public class VendingMachine {
-    private final Coins coins;
+    private Coins coins;
     private Items items;
+    private Money consumerMoney;
 
-    public VendingMachine(Coins coins) {
+    public void initCoins(Coins coins) {
         this.coins = coins;
     }
 
@@ -17,5 +18,9 @@ public class VendingMachine {
 
     public void initItems(List<Item> items) {
         this.items = new Items(items);
+    }
+
+    public void initConsumerMoney(Money consumerMoney) {
+        this.consumerMoney = consumerMoney;
     }
 }

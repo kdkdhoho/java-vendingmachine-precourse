@@ -17,10 +17,8 @@ public class MainController {
     public void run() {
         run(this::initMachineMoney);
         outputView.printMachineCoins(mainService.getMachineCoins());
-
         run(this::initItems);
-
-        int userMoney = repeat(inputView::readUserMoney);
+        run(this::initConsumerMoney);
     }
 
     private void initMachineMoney() {
@@ -30,7 +28,12 @@ public class MainController {
 
     private void initItems() {
         List<String[]> items = repeat(inputView::readItems);
-        mainService.setItems(items);
+        mainService.initItems(items);
+    }
+
+    private void initConsumerMoney() {
+        int consumerMoney = repeat(inputView::readConsumerMoney);
+        mainService.initConsumerMoney(consumerMoney);
     }
 
     private <T> T repeat(Supplier<T> reader) {
@@ -48,24 +51,6 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             run(runnable);
-        }
-    }
-
-    private <T> void process(Consumer<T> consumer, T t) {
-        try {
-            consumer.accept(t);
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
-            process(consumer, t);
-        }
-    }
-
-    private <T> T apply(Function<T, T> function, T t) {
-        try {
-            return function.apply(t);
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
-            return function.apply(t);
         }
     }
 }
