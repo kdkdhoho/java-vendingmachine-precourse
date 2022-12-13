@@ -7,13 +7,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 public class InputView {
     private static final int IDX_PRICE = 1;
     private static final int IDX_QUANTITY = 2;
 
     public int readMachineMoney() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        String input = Console.readLine();
+        String input = readLine();
         return toInt(input);
     }
 
@@ -27,7 +29,7 @@ public class InputView {
 
     public List<String[]> readItems() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요. 예) [콜라,1500,20];[사이다,1000,10]");
-        String[] input = Console.readLine().split(";");
+        String[] input = readLine().split(";");
         List<String> items = beforeProcess(input);
         validateItems(items);
         return afterProcess(items);
@@ -57,8 +59,12 @@ public class InputView {
     }
 
     private void validateNumeric(String[] details) {
-        toInt(details[IDX_PRICE]);
-        toInt(details[IDX_QUANTITY]);
+        try {
+            toInt(details[IDX_PRICE]);
+            toInt(details[IDX_QUANTITY]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("다시 입력해주세요");
+        }
     }
 
     private List<String[]> afterProcess(List<String> input) {
@@ -69,4 +75,11 @@ public class InputView {
         }
         return result;
     }
+
+    public int readUserMoney() {
+        System.out.println(System.lineSeparator() + "투입 금액을 입력해 주세요.");
+        String input = readLine();
+        return toInt(input);
+    }
+
 }

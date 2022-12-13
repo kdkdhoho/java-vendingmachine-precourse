@@ -19,6 +19,8 @@ public class MainController {
         outputView.printMachineCoins(mainService.getMachineCoins());
 
         run(this::initItems);
+
+        int userMoney = repeat(inputView::readUserMoney);
     }
 
     private void initMachineMoney() {
