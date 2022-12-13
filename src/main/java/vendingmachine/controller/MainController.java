@@ -6,7 +6,6 @@ import vendingmachine.view.OutputView;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MainController {
@@ -19,6 +18,11 @@ public class MainController {
         outputView.printMachineCoins(mainService.getMachineCoins());
         run(this::initItems);
         run(this::initConsumerMoney);
+
+        while (mainService.canBuy()) {
+            run(this::readBuyItem);
+        }
+        outputView.printInsertMoney(mainService.getInsertMoney());
     }
 
     private void initMachineMoney() {
@@ -36,6 +40,12 @@ public class MainController {
         mainService.initConsumerMoney(consumerMoney);
     }
 
+    private void readBuyItem() {
+        outputView.printInsertMoney(mainService.getInsertMoney());
+        String itemName = inputView.readPurchaseItem();
+        mainService.buyItem(itemName);
+    }
+
     private <T> T repeat(Supplier<T> reader) {
         try {
             return reader.get();
@@ -51,6 +61,15 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             run(runnable);
+        }
+    }
+
+    private <T> void process(Consumer<T> consumer, T t) {
+        try {
+            consumer.accept(t);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            process(consumer, t);
         }
     }
 }

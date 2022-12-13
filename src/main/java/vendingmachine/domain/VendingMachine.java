@@ -23,4 +23,34 @@ public class VendingMachine {
     public void initConsumerMoney(Money consumerMoney) {
         this.consumerMoney = consumerMoney;
     }
+
+    public boolean canBuy() {
+        Price minPrice = getMinPrice();
+        if (consumerMoney.isLowerThan(minPrice) || isSoldOut()) {
+            return false;
+        }
+        return true;
+    }
+
+    private Price getMinPrice() {
+        Item minPriceItem = items.getMinPriceItem();
+        return minPriceItem.getPrice();
+    }
+
+    private boolean isSoldOut() {
+        return items.isSoldOut();
+    }
+
+    public Item find(String itemName) {
+        return items.find(itemName);
+    }
+
+    public void buy(Item item) {
+        items.buy(item);
+        consumerMoney = consumerMoney.calculate(item);
+    }
+
+    public Money getConsumerMoney() {
+        return this.consumerMoney;
+    }
 }

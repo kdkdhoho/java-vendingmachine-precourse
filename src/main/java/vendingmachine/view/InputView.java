@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import com.sun.xml.internal.ws.addressing.WsaActionUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,4 +82,8 @@ public class InputView {
         return toInt(input);
     }
 
+    public String readPurchaseItem() {
+        System.out.println(System.lineSeparator() + "구매할 상품명을 입력해 주세요.");
+        return readLine();
+    }
 }

@@ -3,7 +3,7 @@ package vendingmachine.domain;
 public class Quantity {
     private static final int MIN_VALUE = 0;
 
-    private int quantity;
+    private final int quantity;
 
     public Quantity(int quantity) {
         validate(quantity);
@@ -18,5 +18,13 @@ public class Quantity {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public boolean isLowerThan(int value) {
+        return quantity < value;
+    }
+
+    public Quantity minus() {
+        return new Quantity(quantity - 1);
     }
 }

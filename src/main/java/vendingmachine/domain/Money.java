@@ -59,7 +59,15 @@ public class Money {
         return this.money >= value;
     }
 
-    public Money subtract(int value) {
+    public boolean isLowerThan(Price price) {
+        return price.isBiggerThan(this.money);
+    }
+
+    public Money calculate(int value) {
         return new Money(this.money - value);
+    }
+
+    public Money calculate(Item item) {
+        return new Money(item.calculateMoney(money));
     }
 }

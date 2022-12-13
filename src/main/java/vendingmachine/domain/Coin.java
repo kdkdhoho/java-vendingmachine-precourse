@@ -33,7 +33,7 @@ public enum Coin {
             Coin randomCoin = shuffleAndGetFirst(coins);
             if (money.isBiggerOrEqualThan(randomCoin.amount)) {
                 result.put(randomCoin, result.getOrDefault(randomCoin, DEFAULT) + 1);
-                money = money.subtract(randomCoin.amount);
+                money = money.calculate(randomCoin.amount);
             }
         }
         return result;
