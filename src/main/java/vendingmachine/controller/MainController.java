@@ -5,6 +5,7 @@ import vendingmachine.service.MainService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -17,6 +18,8 @@ public class MainController {
         int machineMoney = repeat(inputView::readMachineMoney);
         Map<Coin, Integer> machineCoins = mainService.changeCoins(machineMoney);
         outputView.printMachineCoins(machineCoins);
+
+        List<String[]> items = repeat(inputView::readItems);
     }
 
     private <T> T repeat(Supplier<T> reader) {
