@@ -24,6 +24,7 @@ public class VendingMachine {
         this.consumerMoney = consumerMoney;
     }
 
+    // TODO: 리팩토링, 조건 추가
     public boolean canBuy() {
         Price minPrice = getMinPrice();
         if (consumerMoney.isLowerThan(minPrice) || isSoldOut()) {
