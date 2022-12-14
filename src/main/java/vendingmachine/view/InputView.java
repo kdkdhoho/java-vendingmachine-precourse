@@ -65,6 +65,13 @@ public class InputView {
         return toInt(input);
     }
 
+    public String readItemName() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String input = readLine();
+        validateEmpty(input);
+        return input;
+    }
+
     private int toInt(String input) {
         try {
             return Integer.parseInt(input);

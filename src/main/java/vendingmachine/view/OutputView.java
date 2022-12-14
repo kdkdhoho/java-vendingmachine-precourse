@@ -18,4 +18,8 @@ public class OutputView {
     public void printError(String message) {
         System.out.println(PREFIX + message);
     }
+
+    public void printRemainMoney(int remainMoney) {
+        System.out.printf("투입 금액: %d원\n", remainMoney);
+    }
 }

@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Objects;
+
 public class Price {
     private final static int MIN_VALUE = 100;
     private final static int UNIT = 10;
@@ -27,7 +29,20 @@ public class Price {
         }
     }
 
-    public int getPrice() {
+    public int getValue() {
         return price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Price price1 = (Price) o;
+        return getValue() == price1.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
     }
 }

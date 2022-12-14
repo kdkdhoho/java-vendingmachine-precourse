@@ -40,4 +40,17 @@ public class MainService {
     public void insertMoney(int money) {
         vendingMachine.insertMoney(new Money(money));
     }
+
+    public boolean canBuy() {
+        return vendingMachine.canSell();
+    }
+
+    public int getRemainMoney() {
+        return vendingMachine.getInsertMoney().getValue();
+    }
+
+    public void buy(String itemName) {
+        Item targetItem = vendingMachine.findItem(itemName);
+        vendingMachine.buy(targetItem);
+    }
 }

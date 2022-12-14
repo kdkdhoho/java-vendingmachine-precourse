@@ -19,10 +19,12 @@ public class MainController {
         int machineMoney = repeat(inputView::readMachineMoney);
         Map<Coin, Integer> machineCoins = mainService.changeCoins(machineMoney);
         outputView.printMachineCoins(machineCoins);
-
         process(this::initVendingMachine, machineCoins);
-
         run(this::insertMoney);
+        while (mainService.canBuy()) {
+            run(this::buyItem);
+        }
+//        outputView.printChanges(mainService.getChanges());
     }
 
     private void initVendingMachine(Map<Coin, Integer> machineCoins) {
@@ -33,6 +35,12 @@ public class MainController {
     private void insertMoney() {
         int insertMoney = repeat(inputView::readInsertMoney);
         mainService.insertMoney(insertMoney);
+    }
+
+    private void buyItem() {
+        outputView.printRemainMoney(mainService.getRemainMoney());
+        String itemName = repeat(inputView::readItemName);
+        mainService.buy(itemName);
     }
 
     private <T> T repeat(Supplier<T> reader) {
