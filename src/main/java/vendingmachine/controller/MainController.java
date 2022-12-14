@@ -7,6 +7,7 @@ import vendingmachine.view.OutputView;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class MainController {
@@ -19,7 +20,12 @@ public class MainController {
         Map<Coin, Integer> machineCoins = mainService.changeCoins(machineMoney);
         outputView.printMachineCoins(machineCoins);
 
+        process(this::initVendingMachine, machineCoins);
+    }
+
+    private void initVendingMachine(Map<Coin, Integer> machineCoins) {
         List<String[]> items = repeat(inputView::readItems);
+        mainService.initVendingMachine(machineCoins, items);
     }
 
     private <T> T repeat(Supplier<T> reader) {
@@ -28,6 +34,15 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return repeat(reader);
+        }
+    }
+
+    private <T> void process(Consumer<T> consumer, T t) {
+        try {
+            consumer.accept(t);
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            process(consumer, t);
         }
     }
 }
