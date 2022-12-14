@@ -4,6 +4,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.Price;
 import vendingmachine.domain.VendingMachine;
 
@@ -34,5 +35,9 @@ public class MainService {
                     return new Item(name, price, quantity);
                 })
                 .collect(Collectors.toList());
+    }
+
+    public void insertMoney(int money) {
+        vendingMachine.insertMoney(new Money(money));
     }
 }

@@ -21,11 +21,18 @@ public class MainController {
         outputView.printMachineCoins(machineCoins);
 
         process(this::initVendingMachine, machineCoins);
+
+        run(this::insertMoney);
     }
 
     private void initVendingMachine(Map<Coin, Integer> machineCoins) {
         List<String[]> items = repeat(inputView::readItems);
         mainService.initVendingMachine(machineCoins, items);
+    }
+
+    private void insertMoney() {
+        int insertMoney = repeat(inputView::readInsertMoney);
+        mainService.insertMoney(insertMoney);
     }
 
     private <T> T repeat(Supplier<T> reader) {
@@ -34,6 +41,15 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return repeat(reader);
+        }
+    }
+
+    private <T> void run(Runnable runnable) {
+        try {
+            runnable.run();
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            run(runnable);
         }
     }
 

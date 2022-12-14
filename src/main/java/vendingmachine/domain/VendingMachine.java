@@ -9,4 +9,8 @@ public class VendingMachine {
         this.coins = coins;
         this.items = items;
     }
+
+    public void insertMoney(Money money) {
+        this.insertMoney = money;
+    }
 }

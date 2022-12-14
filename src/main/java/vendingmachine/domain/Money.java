@@ -1,6 +1,9 @@
 package vendingmachine.domain;
 
 public class Money {
+    private final static int MIN_VALUE = 0;
+    private final static int UNIT = 10;
+
     private int money;
 
     public Money(int money) {
@@ -9,11 +12,11 @@ public class Money {
     }
 
     private void validate(int money) {
-        if (money < 0) {
+        if (money < MIN_VALUE) {
             throw new IllegalArgumentException("금액은 0원 이상이여야 합니다.");
         }
 
-        if (money % 10 != 0) {
+        if (money % UNIT != 0) {
             throw new IllegalArgumentException("금액은 10원으로 나눠떨어져야 합니다.");
         }
     }
