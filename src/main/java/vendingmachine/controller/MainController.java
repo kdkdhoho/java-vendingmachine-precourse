@@ -16,6 +16,7 @@ public class MainController {
     public void run() {
         int machineMoney = repeat(inputView::readMachineMoney);
         Map<Coin, Integer> machineCoins = mainService.changeCoins(machineMoney);
+        outputView.printMachineCoins(machineCoins);
     }
 
     private <T> T repeat(Supplier<T> reader) {
