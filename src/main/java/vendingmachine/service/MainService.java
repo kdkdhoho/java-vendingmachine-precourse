@@ -53,4 +53,8 @@ public class MainService {
         Item targetItem = vendingMachine.findItem(itemName);
         vendingMachine.buy(targetItem);
     }
+
+    public Map<Coin, Integer> change() {
+        return vendingMachine.change();
+    }
 }

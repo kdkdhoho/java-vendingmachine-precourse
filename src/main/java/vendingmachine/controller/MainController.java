@@ -24,7 +24,7 @@ public class MainController {
         while (mainService.canBuy()) {
             run(this::buyItem);
         }
-//        outputView.printChanges(mainService.getChanges());
+        outputView.printChanges(mainService.change(), mainService.getRemainMoney());
     }
 
     private void initVendingMachine(Map<Coin, Integer> machineCoins) {

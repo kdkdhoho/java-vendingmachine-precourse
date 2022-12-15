@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Map;
+
 public class VendingMachine {
     private final Coins coins;
     private final Items items;
@@ -46,5 +48,13 @@ public class VendingMachine {
 
         int price = targetItem.getPrice().getValue();
         insertMoney.subtract(price);
+    }
+
+    public Map<Coin, Integer> change() {
+        int targetMoney = insertMoney.getValue();
+        if (coins.isLowerOrEqualThan(targetMoney)) {
+            return coins.getCoins();
+        }
+        return coins.change(targetMoney);
     }
 }
